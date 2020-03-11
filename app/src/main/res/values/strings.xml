@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Mayın Tarlası</string>
+    <string name="play_button">PLAY !</string>
+    <string name="game_title">MAYIN TARLASI</string>
+    <string name="loading">Yukleniyor</string>
+    <string name="wanna_exit">Gerçekten çıkmak istiyor musunuz?</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+</resources>
