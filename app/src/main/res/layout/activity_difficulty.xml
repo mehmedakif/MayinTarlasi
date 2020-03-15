@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background"
+    tools:context=".DifficultyActivity">
+
+    <SeekBar
+        android:id="@+id/seekbar_difficulty"
+        style="@style/Widget.AppCompat.SeekBar"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:max="2"
+        android:progress="1"
+        android:progressBackgroundTint="#DF2D2D"
+        android:progressBackgroundTintMode="multiply"
+        android:progressDrawable="@drawable/seekbar_style"
+        android:soundEffectsEnabled="false"
+        android:splitTrack="false"
+        android:thumb="@drawable/custom_thumb"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_select_diffuculty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/select_difficulty"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/seekbar_difficulty"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/text_difficulty_mapsize"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAllCaps="false"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toTopOf="@+id/text_select_diffuculty"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_difficulty_minecount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_difficulty_mapsize" />
+
+    <TextView
+        android:id="@+id/text_easy"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/easy"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/seekbar_difficulty"
+        app:layout_constraintTop_toBottomOf="@+id/seekbar_difficulty" />
+
+    <TextView
+        android:id="@+id/text_medium"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/medium"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/text_hard"
+        app:layout_constraintStart_toEndOf="@+id/text_easy"
+        app:layout_constraintTop_toBottomOf="@+id/seekbar_difficulty" />
+
+    <TextView
+        android:id="@+id/text_hard"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/hard"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/seekbar_difficulty"
+        app:layout_constraintTop_toBottomOf="@+id/seekbar_difficulty" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,7 +41,7 @@ public class StartActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View paramV) {
-                Intent myIntent = new Intent(StartActivity.this, MainActivity.class);
+                Intent myIntent = new Intent(StartActivity.this, DifficultyActivity.class);
                 StartActivity.this.startActivity(myIntent);
             }
         });

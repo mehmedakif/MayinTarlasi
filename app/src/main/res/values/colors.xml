@@ -8,4 +8,5 @@
     <color name="brown_light">#CF931A</color>
     <color name="transparent_white">#CC155000</color>
     <color name="positive_green">#28AC2A</color>
+    <color name="black">#000000</color>
 </resources>
