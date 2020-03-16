@@ -3,20 +3,16 @@ package com.koala.mayintarlasi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.view.View.OnClickListener;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.Objects;
@@ -36,6 +32,8 @@ public class StartActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
         final Button continue_button = findViewById(R.id.continue_button);
         button_animation(continue_button);
+
+
 
         continue_button.setOnClickListener(new OnClickListener() {
 

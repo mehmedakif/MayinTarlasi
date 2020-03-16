@@ -39,14 +39,16 @@ public class DifficultyActivity extends AppCompatActivity {
                 Animation animation2 = AnimationUtils.loadAnimation(DifficultyActivity.this, R.anim.scale_down);
                 animation2.setFillAfter(true);
                 text_mapsize.startAnimation(animation2);
+
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 // TODO Auto-generated method stub
-                Animation animation2 = AnimationUtils.loadAnimation(DifficultyActivity.this, R.anim.scale_up);
-                animation2.setFillAfter(true);
-                text_mapsize.startAnimation(animation2);
+                Animation scaleUpAnimation = AnimationUtils.loadAnimation(DifficultyActivity.this, R.anim.scale_up);
+                scaleUpAnimation.setFillAfter(true);
+                text_mapsize.startAnimation(scaleUpAnimation);
+
             }
 
             @Override
@@ -54,14 +56,20 @@ public class DifficultyActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
 
                 if (String.valueOf(progress).equals("0"))
-                {text_mapsize.setText(getResources().getString(R.string.map8));
-                text_mine_count.setText("10 Mayin");}
+                {
+                    text_mapsize.setText(getResources().getString(R.string.map8));
+                    text_mine_count.setText("10 Mayin");
+                }
                 else if (String.valueOf(progress).equals("1"))
-                {text_mapsize.setText(getResources().getString(R.string.map10));
-                    text_mine_count.setText("20 Mayin");}
-                else
-                {text_mapsize.setText(getResources().getString(R.string.map12));
-                    text_mine_count.setText("30 Mayin");}
+                {
+                    text_mapsize.setText(getResources().getString(R.string.map10));
+                    text_mine_count.setText("20 Mayin");
+                }
+                else if (String.valueOf(progress).equals("2"))
+                {
+                    text_mapsize.setText(getResources().getString(R.string.map12));
+                    text_mine_count.setText("30 Mayin");
+                }
 
             }
         });
