@@ -2,32 +2,51 @@ package com.koala.mayintarlasi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class DifficultyActivity extends AppCompatActivity {
 
+    public GameMap new_game;
+    Dialog dialog;
+    Button exit_yes;
+    Button exit_no;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_difficulty);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         final TextView text_mapsize= findViewById(R.id.text_difficulty_mapsize);
-        text_mapsize.setTextColor(getResources().getColor(R.color.black));
+        text_mapsize.setTextColor(getResources().getColor(R.color.brown));
         text_mapsize.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         text_mapsize.setText(getResources().getString(R.string.map10));
+        text_mapsize.setTypeface(text_mapsize.getTypeface(), Typeface.BOLD);
 
         final TextView text_mine_count = findViewById(R.id.text_difficulty_minecount);
-        text_mine_count.setTextColor(getResources().getColor(R.color.black));
+        text_mine_count.setTextColor(getResources().getColor(R.color.brown));
         text_mine_count.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         text_mine_count.setText("20 Mayin");
+        text_mine_count.setTypeface(text_mine_count.getTypeface(), Typeface.BOLD);
+
+        Button start_button = findViewById(R.id.start_game_button);
+        button_animation(start_button);
 
 
         final SeekBar sk=(SeekBar) findViewById(R.id.seekbar_difficulty);
@@ -73,6 +92,60 @@ public class DifficultyActivity extends AppCompatActivity {
 
             }
         });
+
+        start_button.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                new_game = new GameMap(sk.getProgress());
+                Intent intent = new Intent(getBaseContext(), GameActivity.class);
+                intent.putExtra("Map", new_game.linear_map);
+                intent.putExtra("Size", new_game.map_size);
+                startActivity(intent);
+
+            }
+        });
+    }
+
+    private void button_animation(Button button) {
+
+        Animation animation2 = AnimationUtils.loadAnimation(DifficultyActivity.this, R.anim.button_jiggle);
+        animation2.setFillAfter(true);
+        button.startAnimation(animation2);
+
+    }
+
+    public void onBackPressed()
+    {
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_exit);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        exit_yes = (Button) dialog.findViewById(R.id.button_exit_yes);
+        exit_no = (Button) dialog.findViewById(R.id.button_exit_no);
+
+        exit_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View paramV) {
+                Toast.makeText(getApplicationContext(), "YES", Toast.LENGTH_LONG).show();
+                System.exit(0);
+
+            }
+        });
+
+
+        exit_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View paramV) {
+                Toast.makeText(getApplicationContext(), "NO", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+
     }
 
 }

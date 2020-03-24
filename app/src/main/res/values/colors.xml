@@ -4,9 +4,9 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="white">#FFFFFF</color>
-    <color name="brown">#F48FB1</color>
-    <color name="brown_light">#F48FB1</color>
+    <color name="brown">#B71C1C</color>
+    <color name="brown_light">#B71C1C</color>
     <color name="positive_green">#28AC2A</color>
     <color name="black">#000000</color>
-    <color name="background">#E3F2FD</color>
+    <color name="background">#424141</color>
 </resources>

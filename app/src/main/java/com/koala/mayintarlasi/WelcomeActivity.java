@@ -17,7 +17,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private Runnable start_activity = new Runnable() {
         public void run() {
             progressbar_loading.setProgress(100);
-            Intent i = new Intent(getApplicationContext(),StartActivity.class);
+            Intent i = new Intent(getApplicationContext(),DifficultyActivity.class);
             startActivity(i);
             finish();
         }
@@ -38,8 +38,6 @@ public class WelcomeActivity extends AppCompatActivity {
         Handler mHandler = new Handler();
 
         mHandler.postDelayed(start_activity,2000);
-
-
 
 
 
