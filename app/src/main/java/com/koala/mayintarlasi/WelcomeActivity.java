@@ -37,9 +37,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         Handler mHandler = new Handler();
 
-        mHandler.postDelayed(start_activity,2000);
-
-
+        mHandler.postDelayed(start_activity,0);
 
     }
 

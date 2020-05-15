@@ -7,9 +7,9 @@
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
     <string name="select_difficulty">Zorluk seviyesi seciniz</string>
-    <string name="map8">8x8</string>
-    <string name="map10">10x10</string>
-    <string name="map12">12x12</string>
+    <string name="mapEasy">7x7</string>
+    <string name="mapMedium">9x9</string>
+    <string name="mapHard">11x11</string>
     <string name="easy">Kolay</string>
     <string name="medium">Orta</string>
     <string name="hard">Zor</string>
