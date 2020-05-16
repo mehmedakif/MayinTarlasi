@@ -9,15 +9,18 @@ import java.util.Random;
 
 public class GameMap
 {
-
-    public int[][] map;
     int map_size;
-    int[] mine_array_1d;
+    private int[] mine_array_1d;
     int[][] mine_array_2d;
+    int[][] revealedTiles;
     private int difficulty;
     private int tile_count;
 
-/*Constructor of GameMap class. Gets difficulty.*/
+    /*Constructor of GameMap class. Gets difficulty.
+    *
+    *
+    * */
+
     GameMap(int chosen_difficulty)
     {
         difficulty = chosen_difficulty;
@@ -26,25 +29,25 @@ public class GameMap
         if(chosen_difficulty == 0)
         {
             map_size = 7;
-            mine_count = 9;
+            mine_count = 7;
         }
         else if (chosen_difficulty==1)
         {
             map_size = 9;
-            mine_count = 16;
+            mine_count = 10;
 
         }
         else
         {map_size = 11;
-            mine_count = 25;
+            mine_count = 12;
         }
 
         //Total number of tile assigned as square of map size.
         tile_count = map_size * map_size;
         mine_array_1d = new int[tile_count];
-
         /*Constructor calls set_mines after setting map size and mine count*/
         set_mines_to_1d_array(mine_count);
+
 
 
     }
@@ -66,14 +69,17 @@ public class GameMap
         }
         mines_1d_to_2d_convert(this.mine_array_1d);
     }
+
     private void mines_1d_to_2d_convert(int[] one_dimensional)
     {
         mine_array_2d = new int[map_size][map_size];
+        revealedTiles = new int[map_size][map_size];;
         tile_count=0;
         for(int i = 0; i < map_size-1; i++)
         {
             for(int j = 0; j < map_size-1; j++)
             {
+                revealedTiles[i][j]=0;
                 mine_array_2d[i][j] = one_dimensional[tile_count];
                 tile_count++;
             }
@@ -86,7 +92,9 @@ public class GameMap
     {
         return difficulty;
     }
-    public void setDifficulty(int difficulty) {
+
+    public void setDifficulty(int difficulty)
+    {
         difficulty = difficulty;
     }
 }

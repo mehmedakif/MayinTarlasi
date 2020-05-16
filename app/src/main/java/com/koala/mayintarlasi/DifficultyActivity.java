@@ -20,7 +20,6 @@ import java.util.Objects;
 
 public class DifficultyActivity extends AppCompatActivity {
 
-    public GameMap new_map;
     Dialog dialog;
     Button exit_yes;
     Button exit_no;
@@ -95,10 +94,10 @@ public class DifficultyActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                new_map = new GameMap(seekbarDifficulty.getProgress());
+                //new_map = new GameMap(seekbarDifficulty.getProgress());
                 Intent intent = new Intent(getBaseContext(), GameActivity.class);
-                intent.putExtra("Map", new_map.mine_array_1d);
-                intent.putExtra("Size", new_map.map_size);
+                //intent.putExtra("Map", new_map.mine_array_1d);
+                intent.putExtra("SeekbarStatus", seekbarDifficulty.getProgress());
                 startActivity(intent);
             }
         });
