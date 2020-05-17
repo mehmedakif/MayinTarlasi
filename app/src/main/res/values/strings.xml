@@ -1,19 +1,23 @@
 <resources>
-    <string name="app_name">Mayın Tarlası</string>
     <string name="play_button">OYNA !</string>
     <string name="game_title">MAYIN TARLASI</string>
-    <string name="loading">Yukleniyor</string>
+    <string name="loading">Yükleniyor</string>
     <string name="wanna_exit">Gerçekten çıkmak istiyor musunuz?</string>
     <string name="game_over">Malesef mayına bastın</string>
+    <string name="game_win">Tebrikler tüm mayınları temizledin!</string>
     <string name="go_back">Geri dön</string>
+    <string name="play_again">Yeniden Oyna</string>
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
-    <string name="select_difficulty">Zorluk seviyesi seciniz</string>
+    <string name="select_difficulty">Zorluk seviyesi seçiniz</string>
     <string name="mapEasy">7x7</string>
     <string name="mapMedium">9x9</string>
     <string name="mapHard">11x11</string>
     <string name="easy">Kolay</string>
     <string name="medium">Orta</string>
     <string name="hard">Zor</string>
-
+    <string name="minesEasy">5 Mayın</string>
+    <string name="minesMedium">10 Mayın</string>
+    <string name="minesHard">20 Mayın</string>
+    <string name="app_name">Mayın Tarlası</string>
 </resources>

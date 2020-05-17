@@ -31,13 +31,13 @@ public class WelcomeActivity extends AppCompatActivity {
         progressbar_loading = findViewById(R.id.progressbar_loading);
 
         ObjectAnimator progressAnimator = ObjectAnimator.ofInt(progressbar_loading,"progress",0,96);
-        progressAnimator.setDuration(1300);
+        progressAnimator.setDuration(1400);
         progressAnimator.setInterpolator(new LinearInterpolator());
         progressAnimator.start();
 
         Handler mHandler = new Handler();
 
-        mHandler.postDelayed(start_activity,0);
+        mHandler.postDelayed(start_activity,1500);
 
     }
 

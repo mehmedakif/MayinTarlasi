@@ -32,7 +32,7 @@
             android:scaleType="fitXY">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textview_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
@@ -42,7 +42,7 @@
                 android:padding="15dp"
                 android:text="TIME"
                 android:textAllCaps="true"
-                android:textColor="@color/white" />
+                android:textColor="@color/primary_text_color" />
 
             <Button
                 android:id="@+id/button_stop"
@@ -66,7 +66,7 @@
                 android:gravity="center"
                 android:padding="15dp"
                 android:text="LEAVE"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/primary_text_color" />
 
         </LinearLayout>
 
@@ -76,7 +76,6 @@
         android:id="@+id/tableLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#26FFFFFF"
         android:gravity="center|center_horizontal|fill_horizontal|center_vertical"
         android:hapticFeedbackEnabled="false"
         android:padding="20dp"
@@ -85,7 +84,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutVertical"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutVertical" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
