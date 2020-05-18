@@ -8,8 +8,8 @@
 
     <Button
         android:id="@+id/go_back"
-        android:layout_width="160dp"
-        android:layout_height="86dp"
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/button_negative"
         android:text="@string/go_back"
         android:textColor="@color/background"
@@ -21,13 +21,13 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="312dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
         android:text="@string/game_over"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/background"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -20,4 +20,7 @@
     <string name="minesMedium">10 Mayın</string>
     <string name="minesHard">20 Mayın</string>
     <string name="app_name">Mayın Tarlası</string>
+    <string name="scoreboard">En İyiler</string>
+    <string name="noscoreyet">-</string>
+
 </resources>

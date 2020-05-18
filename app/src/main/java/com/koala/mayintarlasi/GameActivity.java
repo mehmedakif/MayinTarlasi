@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,16 +25,21 @@ public class GameActivity extends AppCompatActivity {
     Button exit_yes;
     TableLayout table;
     GameMap new_game;
+    DisplayMetrics displayMetrics;
+    TextView timer_text;
+    TextView player_score;
+    Handler handler;
+    String score;
+    String best_score;
     int map_size;
     int[][] flag_array;
-    TextView timer_text;
     long MillisecondTime, StartTime, TimeBuff, UpdateTime = 0L ;
-    Handler handler;
     int Seconds, Minutes, MilliSeconds ;
     int difficulty;
-    DisplayMetrics displayMetrics;
     int screenwidth;
     int sum_of_mines;
+    DBManager dbManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -69,11 +73,11 @@ public class GameActivity extends AppCompatActivity {
             UpdateTime = TimeBuff + MillisecondTime;
             Seconds = (int) (UpdateTime / 1000);
             Minutes = Seconds / 60;
-            Seconds = Seconds % 60;
+            //Seconds = Seconds % 60;
             MilliSeconds = (int) (UpdateTime % 1000);
-            timer_text.setText("" + Minutes + ":"
-                    + String.format("%02d", Seconds) + ":"
-                    + String.format("%03d", MilliSeconds));
+            timer_text.setText(//"" + Minutes + ":"+
+                     String.format("%02d", Seconds));
+            //+ ":"+ String.format("%03d", MilliSeconds));
             handler.postDelayed(this, 0);
         }
 
@@ -173,24 +177,35 @@ public class GameActivity extends AppCompatActivity {
                             {tileButton.setBackgroundResource(R.color.primary_object_color);}
                         }
 
-
-
                         if(isMatricesEqual(new_game.mine_array_2d,flag_array))
                         {
                             //Kazandiniz.
                             dialog = new Dialog(GameActivity.this);
                             dialog.setContentView(R.layout.dialog_game_won);
                             dialog.setCancelable(false);
+
+                            score = String.valueOf(timer_text.getText());
                             exit_yes = dialog.findViewById(R.id.go_back_win);
+
                             exit_yes.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View paramV) {
                                     dialog.dismiss();
+                                    dbManager = new DBManager(GameActivity.this);
+                                    dbManager.open();
+                                    if (new_game.map_size==7)
+                                    DBManager.insertScore(Seconds,"easy");
+                                    else if (new_game.map_size==9)
+                                        DBManager.insertScore(Seconds,"medium");
+                                    else
+                                        DBManager.insertScore(Seconds,"hard");
+                                    dbManager.close();
                                     finish();
                                 }
                             });
                             dialog.show();
                         }
+
                         return true;
                     }
                 });
@@ -225,22 +240,21 @@ public class GameActivity extends AppCompatActivity {
         {
             new_game.revealedTiles[selected_row][selected_column]=1;
             revealedButton.setText("");
-
-            revealedButton.setBackgroundResource(R.color.background_tint);
-            if((revealedButton.getId())%2==0)
+            if(((revealedButton.getId())%2)==0)
             {
-                revealedButton.getBackground().setAlpha(255);
+                revealedButton.getBackground().setAlpha(145);
             }
+            revealedButton.setBackgroundResource(R.color.background_tint);
             int sum = checkAdjacentMines(selected_row, selected_column, new_game.map_size, new_game.mine_array_2d);
 
             if (sum >= 4)
-            {revealedButton.setTextColor(Color.RED);}
+            {revealedButton.setTextColor(getResources().getColor(R.color.four_mine));}
             if (sum == 3)
-            {revealedButton.setTextColor(Color.MAGENTA);}
-            else if (sum ==1)
-            {revealedButton.setTextColor(Color.BLUE);}
+            {revealedButton.setTextColor(getResources().getColor(R.color.three_mine));}
+            else if (sum ==2)
+            {revealedButton.setTextColor(getResources().getColor(R.color.two_mine));}
             else
-            revealedButton.setTextColor(Color.GREEN);
+            revealedButton.setTextColor(getResources().getColor(R.color.one_mine));
             if(sum!=0)
             revealedButton.setText(String.valueOf(sum));
 

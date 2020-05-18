@@ -24,20 +24,21 @@ public class WelcomeActivity extends AppCompatActivity {
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         Objects.requireNonNull(getSupportActionBar()).hide();
         progressbar_loading = findViewById(R.id.progressbar_loading);
 
         ObjectAnimator progressAnimator = ObjectAnimator.ofInt(progressbar_loading,"progress",0,96);
-        progressAnimator.setDuration(1400);
+        progressAnimator.setDuration(400);
         progressAnimator.setInterpolator(new LinearInterpolator());
         progressAnimator.start();
 
         Handler mHandler = new Handler();
 
-        mHandler.postDelayed(start_activity,1500);
+        mHandler.postDelayed(start_activity,500);
 
     }
 

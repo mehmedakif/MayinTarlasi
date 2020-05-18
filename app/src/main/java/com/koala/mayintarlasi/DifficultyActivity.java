@@ -28,29 +28,41 @@ public class DifficultyActivity extends AppCompatActivity {
     Button start_button;
     TextView text_mapsize;
     TextView text_mine_count;
-
+    Button scoreboard;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_difficulty);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         text_mapsize = findViewById(R.id.text_difficulty_mapsize);
-        text_mapsize.setTextColor(ContextCompat.getColor(this, R.color.primary_text_color));
+        text_mapsize.setTextColor(ContextCompat.getColor(this, R.color.primary_object_color));
         text_mapsize.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         text_mapsize.setText(getResources().getString(R.string.mapMedium));
         text_mapsize.setTypeface(text_mapsize.getTypeface(), Typeface.BOLD);
 
         text_mine_count = findViewById(R.id.text_difficulty_minecount);
-        text_mine_count.setTextColor(ContextCompat.getColor(this, R.color.primary_text_color));
+        text_mine_count.setTextColor(ContextCompat.getColor(this, R.color.primary_object_color));
         text_mine_count.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         text_mine_count.setText(getResources().getString(R.string.minesMedium));
         text_mine_count.setTypeface(text_mine_count.getTypeface(), Typeface.BOLD);
 
         start_button = findViewById(R.id.start_game_button);
         button_animation(start_button);
+
+        scoreboard = findViewById(R.id.button_scoreboard);
+        scoreboard.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+
+                Intent intent = new Intent(getBaseContext(), Scoreboard.class);
+                startActivity(intent);
+            }
+        });
 
         final SeekBar seekbarDifficulty = findViewById(R.id.seekbar_difficulty);
         seekbarDifficulty.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
