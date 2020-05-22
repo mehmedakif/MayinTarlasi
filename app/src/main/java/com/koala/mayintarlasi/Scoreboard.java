@@ -1,11 +1,9 @@
 package com.koala.mayintarlasi;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.TextView;
-
 import java.util.Objects;
 
 
@@ -17,7 +15,7 @@ public class Scoreboard extends AppCompatActivity
     DBManager dbScore;
     Cursor cursor;
     String[] difficulty_array = new String[] {"easy","medium","hard"};
-    int best;
+    String best;
 
 
     @Override
@@ -43,14 +41,14 @@ public class Scoreboard extends AppCompatActivity
 
                 try {
                     do {
-                        best = cursor.getInt(0);
-                        String bestString = String.valueOf(best);
+                        best = String.valueOf(cursor.getInt(0));
+                        String string_second = getResources().getString(R.string.seconds);
                         if (s.equals("easy"))
                             {
-                            text_best_easy.setText(best + " Saniye");
+                            text_best_easy.setText(new StringBuilder().append(best).append(" ").append(string_second).toString());
                             } else if (s.equals("medium")) {
-                           text_best_medium.setText(best + " Saniye");
-                        } else text_best_hard.setText(best + " Saniye");
+                           text_best_medium.setText(new StringBuilder().append(best).append(" ").append(string_second).toString());
+                        } else text_best_hard.setText(new StringBuilder().append(best).append(" ").append(string_second).toString());
                     } while (cursor.moveToNext());
                 } finally {
                     cursor.close();

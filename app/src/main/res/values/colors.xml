@@ -3,18 +3,24 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="positive">#98FF9A</color>
+    <color name="negative">#F57975</color>
+
     <color name="primary_text_color">#4E515E</color>
     <color name="primary_object_color">#FBE9B8</color>
     <color name="primary_object_color_tint">#AAFAECC5</color>
-    <color name="brown">#FFF9E0</color>
-    <color name="positive">#98FF9A</color>
-    <color name="negative">#F57975</color>
-    <color name="black">#000000</color>
+    <color name="thumb_color">#FFF9E0</color>
+
+
     <color name="background">#34373E</color>
-    <color name="text_background">#22000000</color>
     <color name="background_tint">#B344494E</color>
+    <color name="text_background">#22000000</color>
+
+
+    <!-- Mine indicators -->
     <color name="one_mine">#f1e3cb</color>
     <color name="two_mine">#f9b384</color>
     <color name="three_mine">#ca5116</color>
-    <color name="four_mine">#581c0c</color>
+    <color name="four_mine">#6E2917</color>
+    <color name="five_mine">#4E1101</color>
 </resources>

@@ -10,9 +10,9 @@
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
     <string name="select_difficulty">Zorluk seviyesi seçiniz</string>
-    <string name="mapEasy">7x7</string>
-    <string name="mapMedium">9x9</string>
-    <string name="mapHard">11x11</string>
+    <string name="mapEasy">7 x 7</string>
+    <string name="mapMedium">9 x 9</string>
+    <string name="mapHard">11 x 11</string>
     <string name="easy">Kolay</string>
     <string name="medium">Orta</string>
     <string name="hard">Zor</string>
@@ -22,5 +22,5 @@
     <string name="app_name">Mayın Tarlası</string>
     <string name="scoreboard">En İyiler</string>
     <string name="noscoreyet">-</string>
-
+    <string name="seconds">Saniye</string>
 </resources>

@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
+    android:orientation="vertical"
     tools:context=".DifficultyActivity">
 
     <SeekBar
         android:id="@+id/seekbar_difficulty"
         style="@style/Widget.AppCompat.SeekBar"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
+        android:layout_width="327dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="150dp"
         android:max="2"
         android:paddingTop="10dp"
         android:progress="1"
@@ -24,26 +26,10 @@
         android:thumb="@drawable/custom_thumb"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_select_diffuculty" />
-
-    <TextView
-        android:id="@+id/text_select_diffuculty"
-        android:layout_width="326dp"
-        android:layout_height="45dp"
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/text_background"
-        android:gravity="center"
-        android:shadowColor="@color/black"
-        android:text="@string/select_difficulty"
-        android:textAllCaps="true"
-        android:textColor="@color/primary_object_color"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_difficulty_minecount" />
+        app:layout_constraintTop_toBottomOf="@+id/text_difficulty_minecount"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/text_difficulty_mapsize"
@@ -51,7 +37,7 @@
         android:layout_height="wrap_content"
         android:background="@color/text_background"
         android:gravity="center_horizontal|center_vertical"
-        android:padding="5dp"
+        android:padding="15dp"
         android:text="TextView"
         android:textAlignment="center"
         android:textAllCaps="true"
@@ -69,7 +55,6 @@
         android:background="@color/text_background"
         android:gravity="center_horizontal|center_vertical"
         android:padding="5dp"
-        android:shadowColor="@color/black"
         android:text="TextView"
         android:textAlignment="center"
         android:textAllCaps="true"
@@ -83,14 +68,11 @@
         android:id="@+id/text_easy"
         android:layout_width="60dp"
         android:layout_height="25dp"
-        android:layout_marginTop="24dp"
         android:background="@color/text_background"
-        android:shadowColor="@color/black"
         android:text="@string/easy"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/primary_object_color_tint"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/seekbar_difficulty"
         app:layout_constraintTop_toBottomOf="@+id/seekbar_difficulty" />
 
@@ -98,13 +80,10 @@
         android:id="@+id/text_medium"
         android:layout_width="60dp"
         android:layout_height="25dp"
-        android:layout_marginTop="24dp"
         android:background="@color/text_background"
-        android:shadowColor="@color/black"
         android:text="@string/medium"
         android:textAlignment="center"
         android:textColor="@color/primary_object_color_tint"
-        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/text_hard"
         app:layout_constraintStart_toEndOf="@+id/text_easy"
         app:layout_constraintTop_toBottomOf="@+id/seekbar_difficulty" />
@@ -113,13 +92,10 @@
         android:id="@+id/text_hard"
         android:layout_width="60dp"
         android:layout_height="25dp"
-        android:layout_marginTop="24dp"
         android:background="@color/text_background"
-        android:shadowColor="@color/black"
         android:text="@string/hard"
         android:textAlignment="center"
         android:textColor="@color/primary_object_color_tint"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/seekbar_difficulty"
         app:layout_constraintTop_toBottomOf="@+id/seekbar_difficulty" />
 

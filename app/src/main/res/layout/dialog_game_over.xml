@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
     android:layout_height="300dp"
-    android:background="@drawable/round_corners">
+    android:background="@drawable/round_corners"
+    android:padding="30dp">
 
     <Button
         android:id="@+id/go_back"
-        android:layout_width="218dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_negative"
         android:text="@string/go_back"
@@ -31,4 +32,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/scull" />
 </androidx.constraintlayout.widget.ConstraintLayout>

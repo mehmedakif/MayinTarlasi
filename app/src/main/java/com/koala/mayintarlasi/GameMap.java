@@ -1,5 +1,7 @@
 package com.koala.mayintarlasi;
 
+import android.util.Log;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -46,30 +48,28 @@ class GameMap
         for(int i = 0; i< mine_count;)
         {
             int iterator = random.nextInt(tile_count);
-            if (this.mine_array_1d[iterator] != 1)
+            if (mine_array_1d[iterator] == 0)
             {
-                this.mine_array_1d[iterator] = 1;
+                mine_array_1d[iterator] = 1;
                 i++;
             }
         }
-        convert1dTo2d(this.mine_array_1d);
+        convert1dTo2d(mine_array_1d);
     }
 
     private void convert1dTo2d(int[] one_dimensional)
     {
         mine_array_2d = new int[map_size][map_size];
         revealedTiles = new int[map_size][map_size];
-        tile_count=0;
-        for(int i = 0; i < map_size-1; i++)
+        int size = 0;
+        for(int i = 0; i < map_size; i++)
         {
-            for(int j = 0; j < map_size-1; j++)
+            for(int j = 0; j < map_size; j++)
             {
                 revealedTiles[i][j]=0;
-                mine_array_2d[i][j] = one_dimensional[tile_count];
-                tile_count++;
+                mine_array_2d[i][j] = one_dimensional[size];
+                size++;
             }
-            tile_count++;
         }
     }
-
 }

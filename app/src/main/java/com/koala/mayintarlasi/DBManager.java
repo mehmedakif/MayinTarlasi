@@ -29,14 +29,6 @@ class DBManager {
         dbHelper.onCreate(database);
     }
 
-    void cont() throws SQLException
-    {
-        dbHelper = new DBHelper(context);
-        database = dbHelper.getReadableDatabase();
-        Log.i("DB","DATABASE DEVAM");
-        dbHelper.onCreate(database);
-    }
-
     void close()
     {
         Log.i("DB","DATABASE KAPANDI");

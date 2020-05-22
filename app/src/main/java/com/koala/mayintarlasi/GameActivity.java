@@ -18,50 +18,29 @@ import android.widget.Toast;
 
 import java.util.Objects;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity
+{
 
     Context context;
     Dialog dialog;
     Button exit_yes;
-    TableLayout table;
+    TableLayout table_layout;
     GameMap new_game;
+    DBManager dbManager;
     DisplayMetrics displayMetrics;
     TextView timer_text;
-    TextView player_score;
     Handler handler;
-    String score;
-    String best_score;
+    String player_score;
     int map_size;
     int[][] flag_array;
     long MillisecondTime, StartTime, TimeBuff, UpdateTime = 0L ;
     int Seconds, Minutes, MilliSeconds ;
-    int difficulty;
+    int choosen_difficulty;
     int screenwidth;
-    int sum_of_mines;
-    DBManager dbManager;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
-        context = getApplicationContext();
-        Objects.requireNonNull(getSupportActionBar()).hide();
-        handler = new Handler() ;
-
-
-        //Assing map size as intent value. Seekbar value is choosen by user.
-        difficulty = getIntent().getIntExtra("SeekbarStatus",8);
-        //Assing map size as intent value. Seekbar value is choosen by user.
-        new_game = new GameMap(difficulty);
-        //Filling gamegrid with buttons and click events.
-        fill_game_grid();
-        StartTime = SystemClock.uptimeMillis();
-        handler.postDelayed(runnable, 0);
-        timer_text= findViewById(R.id.textview_timer);
-
-    }
+    MediaPlayer sound_dig_pop;
+    MediaPlayer sound_explosion;
+    MediaPlayer sound_flag;
+    MediaPlayer sound_win;
 
     public Runnable runnable = new Runnable()
     {
@@ -73,26 +52,49 @@ public class GameActivity extends AppCompatActivity {
             UpdateTime = TimeBuff + MillisecondTime;
             Seconds = (int) (UpdateTime / 1000);
             Minutes = Seconds / 60;
-            //Seconds = Seconds % 60;
             MilliSeconds = (int) (UpdateTime % 1000);
-            timer_text.setText(//"" + Minutes + ":"+
-                     String.format("%02d", Seconds));
-            //+ ":"+ String.format("%03d", MilliSeconds));
+            timer_text.setText(String.format("%02d", Seconds));
             handler.postDelayed(this, 0);
         }
 
     };
-    public void fill_game_grid()
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
     {
-        final MediaPlayer sound_dig_pop = MediaPlayer.create(this, R.raw.dig_pop);
-        final MediaPlayer sound_explosion = MediaPlayer.create(this, R.raw.explosion);
-        final MediaPlayer sound_flag = MediaPlayer.create(this, R.raw.flag);
-        map_size = new_game.map_size;
-        flag_array = new int[map_size][map_size];
-        table = findViewById(R.id.tableLayout);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
+        context = getApplicationContext();
+        Objects.requireNonNull(getSupportActionBar()).hide();
+        handler = new Handler() ;
         displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenwidth = displayMetrics.widthPixels;
+
+        //Assing map size as intent value. Seekbar value is choosen by user.
+        choosen_difficulty = getIntent().getIntExtra("SeekbarStatus",8);
+        //Assing map size as intent value. Seekbar value is choosen by user.
+        new_game = new GameMap(choosen_difficulty);
+        map_size = new_game.map_size;
+        flag_array = new int[map_size][map_size];
+
+        table_layout = findViewById(R.id.tableLayout);
+
+        sound_dig_pop = MediaPlayer.create(this, R.raw.step);
+        sound_explosion = MediaPlayer.create(this, R.raw.bomb);
+        sound_flag = MediaPlayer.create(this, R.raw.flag);
+        sound_win = MediaPlayer.create(this, R.raw.win);
+
+        //Filling gamegrid with buttons and click events.
+        fill_game_grid();
+        StartTime = SystemClock.uptimeMillis();
+        handler.postDelayed(runnable, 0);
+        timer_text= findViewById(R.id.textview_timer);
+
+    }
+    public void fill_game_grid()
+    {
+
+
         //This loop creates a game grid with given size(difficulty).
         for (int i = 0; i < map_size; i++)
         {
@@ -116,7 +118,6 @@ public class GameActivity extends AppCompatActivity {
                 final int finalI = i;
                 final int finalJ = j;
                 flag_array[i][j] = 0;
-
                 tileButton.setOnClickListener(new View.OnClickListener()
                 {
                     @Override
@@ -128,7 +129,6 @@ public class GameActivity extends AppCompatActivity {
                         //If this tile has a mine.
                             if (new_game.mine_array_2d[finalI][finalJ]==1)
                             {
-
                                 sound_explosion.start();
                                 dialog = new Dialog(GameActivity.this);
                                 dialog.setContentView(R.layout.dialog_game_over);
@@ -139,16 +139,17 @@ public class GameActivity extends AppCompatActivity {
                                     public void onClick(View paramV) {
                                         Toast.makeText(getApplicationContext(), "ASLA PES ETME", Toast.LENGTH_LONG).show();
                                         dialog.dismiss();
-
                                         finish();
                                     }
                                 });
                                 dialog.show();
                             }
-                            sound_dig_pop.start();
+                            else
+                                {
+                                sound_dig_pop.start();
+                                revealTile(finalI, finalJ);
+                                new_game.revealedTiles[finalI][finalJ] =1;}
 
-                            revealTile(finalI, finalJ);
-                            new_game.revealedTiles[finalI][finalJ] =1;
                         }
                     }
 
@@ -179,14 +180,15 @@ public class GameActivity extends AppCompatActivity {
 
                         if(isMatricesEqual(new_game.mine_array_2d,flag_array))
                         {
-                            //Kazandiniz.
+                            //SUCCESS! situation.
+                            sound_win.start();
                             dialog = new Dialog(GameActivity.this);
                             dialog.setContentView(R.layout.dialog_game_won);
                             dialog.setCancelable(false);
 
-                            score = String.valueOf(timer_text.getText());
+                            player_score = String.valueOf(timer_text.getText());
                             exit_yes = dialog.findViewById(R.id.go_back_win);
-
+                            //exit_yes.setOnClickListener(tiles);
                             exit_yes.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View paramV) {
@@ -219,7 +221,7 @@ public class GameActivity extends AppCompatActivity {
                 tileButton.setLayoutParams(params);
                 row.addView(tileButton);
             }
-            table.addView(row);
+            table_layout.addView(row);
         }
     }
     public boolean isMatricesEqual(int[][] A, int[][] B)
@@ -235,11 +237,11 @@ public class GameActivity extends AppCompatActivity {
 
         int id = (selected_row * map_size) + selected_column;
         Button revealedButton = findViewById(id);
-        sum_of_mines=0;
+
         if(new_game.revealedTiles[selected_row][selected_column]==0)
         {
             new_game.revealedTiles[selected_row][selected_column]=1;
-            revealedButton.setText("");
+
             if(((revealedButton.getId())%2)==0)
             {
                 revealedButton.getBackground().setAlpha(145);
@@ -247,22 +249,30 @@ public class GameActivity extends AppCompatActivity {
             revealedButton.setBackgroundResource(R.color.background_tint);
             int sum = checkAdjacentMines(selected_row, selected_column, new_game.map_size, new_game.mine_array_2d);
 
-            if (sum >= 4)
+
+            if (sum >= 5)
             {revealedButton.setTextColor(getResources().getColor(R.color.four_mine));}
-            if (sum == 3)
+            else if (sum == 4)
+            {revealedButton.setTextColor(getResources().getColor(R.color.four_mine));}
+            else if (sum == 3)
             {revealedButton.setTextColor(getResources().getColor(R.color.three_mine));}
             else if (sum ==2)
             {revealedButton.setTextColor(getResources().getColor(R.color.two_mine));}
             else
             revealedButton.setTextColor(getResources().getColor(R.color.one_mine));
             if(sum!=0)
-            revealedButton.setText(String.valueOf(sum));
-
+            {
+                revealedButton.setText(String.valueOf(sum));
+            }
+            else
+            {
+                revealedButton.setText("");
+            }
         }
     }
     public int checkAdjacentMines(int selected_row, int selected_column, int map_border, int[][] mine_array)
     {
-        sum_of_mines = 0;
+        int sum_of_mines;
         //Top-left corner
         if (selected_row == 0 && selected_column == 0)
         {
@@ -271,10 +281,12 @@ public class GameActivity extends AppCompatActivity {
                     mine_array[1][1] +
                     mine_array[0][1];
             if(sum_of_mines==0)
+            {
                 revealTile(1,0);
                 revealTile(1,1);
                 revealTile(0,1);
-            return sum_of_mines;
+            }
+
         }
         //Top-right corner
         else if (selected_row == 0 && selected_column == map_border-1)
@@ -284,10 +296,11 @@ public class GameActivity extends AppCompatActivity {
                     mine_array[1][map_border-1] +
                     mine_array[1][map_border-2];
             if(sum_of_mines==0)
-            revealTile(0,map_border-2);
-            revealTile(1,map_border-1);
-            revealTile(1,map_border-2);
-            return sum_of_mines;
+            {
+                revealTile(0, map_border - 2);
+                revealTile(1, map_border - 1);
+                revealTile(1, map_border - 2);
+            }
         }
         //Bottom-left corner
         else if (selected_row == map_border-1 && selected_column == 0)
@@ -296,11 +309,12 @@ public class GameActivity extends AppCompatActivity {
                     mine_array[map_border-1][0] +
                     mine_array[map_border-1][1] +
                     mine_array[map_border-2][1];
-            if(sum_of_mines==0)
+            if(sum_of_mines==0){
             revealTile(map_border-1,0);
             revealTile(map_border-1,1);
             revealTile(map_border-2,1);
-            return sum_of_mines;
+            }
+            //return sum_of_mines;
         }
         //Bottom right corner
         else if (selected_row == map_border-1 && selected_column == map_border-1)
@@ -310,10 +324,11 @@ public class GameActivity extends AppCompatActivity {
                     mine_array[map_border-2][map_border-2] +
                     mine_array[map_border-2][map_border-1];
             if(sum_of_mines==0)
-            revealTile(map_border-2,map_border-2);
-            revealTile(map_border-2,map_border-1);
-            revealTile(map_border-1,map_border-2);
-            return sum_of_mines;
+            {
+                revealTile(map_border - 2, map_border - 2);
+                revealTile(map_border - 2, map_border - 1);
+                revealTile(map_border - 1, map_border - 2);
+            }
         }
         //Top edge
         else if (selected_row == 0)
@@ -333,8 +348,6 @@ public class GameActivity extends AppCompatActivity {
                 revealTile(selected_row + 1, selected_column);
                 revealTile(selected_row + 1, selected_column + 1);
                 }
-            return sum_of_mines;
-
         }
         //Left edge
         else if (selected_column ==0)
@@ -353,8 +366,6 @@ public class GameActivity extends AppCompatActivity {
                 revealTile(selected_row + 1,selected_column);
                 revealTile(selected_row + 1,selected_column+1);
             }
-            return sum_of_mines;
-
         }
         //Right edge
         else if (selected_column == map_border-1)
@@ -372,10 +383,7 @@ public class GameActivity extends AppCompatActivity {
                 revealTile(selected_row,selected_column-1);
                 revealTile(selected_row + 1,selected_column-1);
                 revealTile(selected_row + 1,selected_column);
-
             }
-            return sum_of_mines;
-
         }
         //Bottom edge
         else if (selected_row == map_border-1)
@@ -394,7 +402,6 @@ public class GameActivity extends AppCompatActivity {
                 revealTile(selected_row, selected_column-1);
                 revealTile(selected_row,selected_column+1);
             }
-            return sum_of_mines;
         }
         else
             {
@@ -419,9 +426,8 @@ public class GameActivity extends AppCompatActivity {
                 revealTile(selected_row+1,selected_column-1);
                 revealTile(selected_row+1,selected_column);
                 revealTile(selected_row+1,selected_column+1);
-
             }
-            return sum_of_mines;
         }
+        return sum_of_mines;
     }
 }
