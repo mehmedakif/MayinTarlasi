@@ -12,11 +12,12 @@ class GameMap
     int[][] mine_array_2d;
     int[][] revealedTiles;
     private int tile_count;
+    int mine_count;
 
     GameMap(int chosen_difficulty)
     {
 
-        int mine_count;
+
         if(chosen_difficulty == 0)
         {
             map_size = 7;

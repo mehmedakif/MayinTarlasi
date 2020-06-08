@@ -128,18 +128,36 @@
 
     <Button
         android:id="@+id/button_scoreboard"
-        android:layout_width="103dp"
-        android:layout_height="34dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:background="@drawable/button_backgrounds"
-        android:drawableStart="@drawable/best_star"
+        android:drawableStart="@android:drawable/star_off"
         android:drawingCacheQuality="high"
         android:paddingStart="2dp"
-        android:paddingEnd="2dp"
-        android:text="@string/scoreboard"
+        android:paddingEnd="5dp"
+        android:text="@string/localscores"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_game_button"
+        app:layout_constraintVertical_bias="0.503" />
+
+    <Button
+        android:id="@+id/button_global_scoreboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/button_backgrounds"
+        android:drawableStart="@android:drawable/ic_menu_compass"
+        android:drawingCacheQuality="high"
+        android:padding="5dp"
+        android:paddingStart="2dp"
+        android:paddingEnd="5dp"
+        android:text="@string/globalscores"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_game_button" />
+        app:layout_constraintTop_toBottomOf="@+id/start_game_button"
+        app:layout_constraintVertical_bias="0.503" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

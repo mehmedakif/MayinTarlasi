@@ -7,7 +7,7 @@ import android.widget.TextView;
 import java.util.Objects;
 
 
-public class Scoreboard extends AppCompatActivity
+public class LocalScoresActivity extends AppCompatActivity
 {
     TextView text_best_easy;
     TextView text_best_medium;
@@ -29,7 +29,7 @@ public class Scoreboard extends AppCompatActivity
         text_best_hard = findViewById(R.id.hard_score);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        dbScore = new DBManager(Scoreboard.this);
+        dbScore = new DBManager(LocalScoresActivity.this);
         dbScore.open();
 
 

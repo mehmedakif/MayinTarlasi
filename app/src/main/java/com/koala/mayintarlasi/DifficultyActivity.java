@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class DifficultyActivity extends AppCompatActivity {
@@ -29,6 +31,7 @@ public class DifficultyActivity extends AppCompatActivity {
     TextView text_mapsize;
     TextView text_mine_count;
     Button scoreboard;
+    Button global_scoreboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,6 +40,9 @@ public class DifficultyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_difficulty);
         Objects.requireNonNull(getSupportActionBar()).hide();
+
+        LocalDate gameDate = LocalDate.now();
+        Log.i("AFKDATE", String.valueOf(gameDate));
 
         text_mapsize = findViewById(R.id.text_difficulty_mapsize);
         text_mapsize.setTextColor(ContextCompat.getColor(this, R.color.primary_object_color));
@@ -54,12 +60,21 @@ public class DifficultyActivity extends AppCompatActivity {
         button_animation(start_button);
 
         scoreboard = findViewById(R.id.button_scoreboard);
+        global_scoreboard = findViewById(R.id.button_global_scoreboard);
         scoreboard.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v)
             {
+                Intent intent = new Intent(getBaseContext(), LocalScoresActivity.class);
+                startActivity(intent);
+            }
+        });
 
-                Intent intent = new Intent(getBaseContext(), Scoreboard.class);
+        global_scoreboard.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getBaseContext(), GlobalScoresActivity.class);
                 startActivity(intent);
             }
         });
@@ -118,6 +133,8 @@ public class DifficultyActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     private void button_animation(Button button)
